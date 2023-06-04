@@ -37,9 +37,9 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#to-do">To Do</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -53,6 +53,11 @@
 [![WebApp Screen Shot][webapp-screenshot]]()
 
 I have used Flask to create a webapp which shortens URLs. I have used Bootstrap for the template of the website.
+
+### To Do
+- [ ] Add a database to store the URLs and their shortened versions.
+- [ ] Add a login system to keep track of the URLs shortened by a user.
+- [ ] Add a feature to keep track of the number of times a shortened URL is used by a user.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -71,13 +76,6 @@ I have used Flask to create a webapp which shortens URLs. I have used Bootstrap 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-_Navigate the Dashboard through the sidebar. Rest is self explanatory._
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
