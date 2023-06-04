@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block body %}
+    <body>
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">Generate a short URL</h1>
+                            <!-- Long URL input-->
+                            <form class="form-floating mb-3" id="long_url_form" action="/" method="post">
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" type="url" name="long_url" placeholder="Enter URL to shorten" />
+                                    </div>
+                                    <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Shorten</button></div>
+                                </div>
+                            </form>
+                            <!-- Form response -->
+                            {% if show %}
+                            <h3 class="mb-5">Your shortened URL: {{short_url}}</h3>
+                            <!-- copy to clipboard button -->
+                            <button class="btn btn-primary btn-sm" id="copyButton" type="button" onclick="copyToClipboard('{{short_url}}')">Copy to Clipboard</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Icons Grid-->
+        <section class="features-icons bg-light text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-bar-chart-line m-auto text-primary"></i></div>
+                            <h3>See Statistics</h3>
+                            <p class="lead mb-0">See who clicked your url and how many times!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-stars m-auto text-primary"></i></div>
+                            <h3>Share Stuff easily</h3>
+                            <p class="lead mb-0">No hassle of sharing long and ugly URLs, just shorten them with one click!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
+                            <h3>Easy to Use</h3>
+                            <p class="lead mb-0">Just put in your url and click the Shoten button!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        {% endblock %}
