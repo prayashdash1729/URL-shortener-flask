@@ -12,7 +12,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h1 align="center">URL Shortener</h1>
+  <ul>
+    <summary><h1 align="center">URL Shortener</h1></summary>
+  </ul>
 
   <p align="center">
     A <a href="https://prayashdash1729-ipl-win-prediction-app-ozgwo3.streamlit.app/">webapp</a> to shorten your long URLs.
@@ -28,7 +30,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details>
+<details open>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -117,7 +119,7 @@ Project Link: [https://github.com/prayashdash1729/URL-shortener-flask](https://g
 [contributors-url]: https://github.com/prayashdash1729/URL-shortener-flask/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/prayashdash1729/URL-shortener-flask.svg?style=for-the-badge
 [forks-url]: https://github.com/prayashdash1729/URL-shortener-flask/network/members
-[stars-shield]: https://img.shields.io/github/stars/URL-shortener-flask/URL-shortener-flask.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/prayashdash1729/URL-shortener-flask.svg?style=for-the-badge
 [stars-url]: https://github.com/prayashdash1729/URL-shortener-flask/stargazers
 [issues-shield]: https://img.shields.io/github/issues/prayashdash1729/URL-shortener-flask.svg?style=for-the-badge
 [issues-url]: https://github.com/prayashdash1729/URL-shortener-flask/issues
