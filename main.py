@@ -48,5 +48,15 @@ def redirect_to_url(short_url):
         return render_template("404.html")
 
 
+@app.route("/signup")
+def signin():
+    return render_template("signup.html")
+
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
