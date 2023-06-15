@@ -1,33 +1,69 @@
 {% extends "signinlayout.html" %}
 {% block body %}
 
-
-<main class="form-signin w-100 m-auto">
-  <form>
-
-    <img class="mb-4" src="{{url_for('static', filename='assets/img/apple-touch-icon.png')}}" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword2" placeholder="Password">
-      <label for="floatingPassword">Confirm Password</label>
+      {% if form.username.errors %}
+        {{ form.username(class="form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.username.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% else %}
+        {{ form.username(class="form-control") }}
+      {% endif %}
+
+      {{ form.username.label() }}
     </div>
 
+    <div class="form-floating">
+      {% if form.email.errors %}
+        {{ form.email(class="form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% else %}
+        {{ form.email(class="form-control") }}
+      {% endif %}
+      {{ form.email.label() }}
+    </div>
 
-    <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
+    <div class="form-floating">
+      {% if form.password.errors %}
+        {{ form.password(class="form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% else %}
+        {{ form.password(class="form-control") }}
+      {% endif %}
+      {{ form.password.label() }}
+    </div>
 
-    <div class="form-check text-start my-3">
-      <div class="form-check-label">
-      Already have an account? <a href="/login">Login</a>
-      </div>
+    <div class="form-floating">
+      {% if form.confirm_password.errors %}
+        {{ form.confirm_password(class="form-control is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.confirm_password.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% else %}
+        {{ form.confirm_password(class="form-control") }}
+      {% endif %}
+      {{ form.confirm_password.label() }}
+    </div>
+
+    <div class="form-group">
+      {{ form.submit(class="btn btn-primary mt-3 w-100 py-2") }}
+    </div>
+
+    <div class="text-muted mt-2 mb-4">
+      Already have an account? <a href="{{url_for('login')}}">Login</a>
     </div>
     <hr>
 

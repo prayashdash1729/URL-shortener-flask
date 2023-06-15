@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash, url_for
+from forms import RegistrationForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
@@ -23,8 +24,9 @@ def generate_short_url(length=6):
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = '182f5606c7f67d4aded0b793195fb171'
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
         long_url = request.form.get("long_url")
@@ -48,14 +50,25 @@ def redirect_to_url(short_url):
         return render_template("404.html")
 
 
-@app.route("/signup")
-def signin():
-    return render_template("signup.html")
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f"Account created for new user {form.username.data}!", "success")
+        return redirect(url_for("home"))
+    return render_template("signup.html", title='Sign Up', form=form)
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    form  = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@admin.com' and form.password.data == 'admin':
+            flash(f"Logged in as {form.email.data}!", "success")
+            return redirect(url_for("home"))
+        else:
+            flash(f"Login unsuccessful. Please check your email and password.", "danger")
+    return render_template("login.html", title='Sign In', form=form)
 
 
 if __name__ == "__main__":
