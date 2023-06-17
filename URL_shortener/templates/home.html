@@ -9,7 +9,7 @@
                       <!-- Page heading-->
                       <h1 class="mb-5">Generate a short URL</h1>
                       <!-- Long URL input-->
-                      <form class="form-floating mb-3" id="long_url_form" action="/" method="post">
+                      <form class="form-floating mb-3" id="long_url_form" action="{{url_for('home')}}" method="post">
                           <div class="row">
                               <div class="col">
                                   <input class="form-control form-control-lg" type="url" name="long_url" placeholder="Enter URL to shorten" />
@@ -19,9 +19,10 @@
                       </form>
                       <!-- Form response -->
                       {% if show %}
-                      <h3 class="mb-5">Your shortened URL: {{short_url}}</h3>
+                      <h4 class="mb-3 mt-3">Your shortened URL for {{long_url}} <br/> is: </h4>
+                      <h4>{{short_url}}</h4>
                       <!-- copy to clipboard button -->
-                      <button class="btn btn-primary btn-sm" id="copyButton" type="button" onclick="copyToClipboard('{{short_url}}')">Copy to Clipboard</button>
+                      <button class="btn btn-primary btn-sm mt-3" id="copyButton" type="button" onclick="copyToClipboard('{{short_url}}')">Copy short link to Clipboard</button>
                       {% endif %}
                   </div>
               </div>

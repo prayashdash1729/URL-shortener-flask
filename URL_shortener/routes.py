@@ -36,7 +36,7 @@ def home():
             json.dump({"links": links}, f)
         f.close()
 
-        return render_template("home.html", short_url=params["HOST"] + short_url, show=True)
+        return render_template("home.html", long_url=long_url[:40] + "...", short_url=params["HOST"] + short_url, show=True)
 
     return render_template("home.html", short_url="", show=False)
 
