@@ -2,8 +2,13 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, URL
 from URL_shortener.models import User
+
+
+class URLForm(FlaskForm):
+    long_url = StringField('Long URL', validators=[DataRequired(), URL()])
+    submit = SubmitField('Shorten')
 
 
 class RegistrationForm(FlaskForm):

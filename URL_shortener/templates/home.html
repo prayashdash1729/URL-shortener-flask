@@ -9,20 +9,42 @@
                       <!-- Page heading-->
                       <h1 class="mb-5">Generate a short URL</h1>
                       <!-- Long URL input-->
-                      <form class="form-floating mb-3" id="long_url_form" action="{{url_for('home')}}" method="post">
+
+                      <form class="form-floating mb-3" method="POST", action="">
+                          {{ form.hidden_tag() }}
                           <div class="row">
-                              <div class="col">
-                                  <input class="form-control form-control-lg" type="url" name="long_url" placeholder="Enter URL to shorten" required/>
+                              {% if form.long_url.errors %}
+                                  {{ form.long_url(class="form-control is-invalid") }}
+                                  <div class="invalid-feedback">
+                                      {% for error in form.long_url.errors %}
+                                      <span>{{ error }}</span>
+                                      {% endfor %}
+                                  </div>
+                              {% else %}
+                                <div class="col">
+                                    {{ form.long_url(class="form-control form-control-lg", placeholder="Enter URL to shorten") }}
+                                </div>
+                              {% endif %}
+                              <div class="col-auto">
+                                {{ form.submit(class="btn btn-primary btn-lg") }}
                               </div>
-                              <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Shorten</button></div>
                           </div>
                       </form>
+
+<!--                      <form class="form-floating mb-3" id="long_url_form" action="" method="POST">-->
+<!--                          <div class="row">-->
+<!--                              <div class="col">-->
+<!--                                  <input class="form-control form-control-lg" type="url" name="long_url" placeholder="Enter URL to shorten" required/>-->
+<!--                              </div>-->
+<!--                              <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Shorten</button></div>-->
+<!--                          </div>-->
+<!--                      </form>-->
                       <!-- Form response -->
                       {% if show %}
-                      <h4 class="mb-3 mt-3">Your shortened URL for {{long_url}} <br/> is: </h4>
-                      <h4>{{short_url}}</h4>
-                      <!-- copy to clipboard button -->
-                      <button class="btn btn-primary btn-sm mt-3" id="copyButton" type="button" onclick="copyToClipboard('{{short_url}}')">Copy short link to Clipboard</button>
+                          <h4 class="mb-3 mt-3">Your shortened URL for {{ long_url }} <br/> is: </h4>
+                          <h4>{{ short_url }}</h4>
+                          <!-- copy to clipboard button -->
+                          <button class="btn btn-primary btn-sm mt-3" id="copyButton" type="button" onclick="copyToClipboard('{{short_url}}')">Copy short link to Clipboard</button>
                       {% endif %}
                   </div>
               </div>

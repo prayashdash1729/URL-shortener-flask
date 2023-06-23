@@ -28,4 +28,4 @@ class Links(db.Model):
     date_created_utc = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
-        return f"Links('{self.user_id}', '{self.long_url}', '{self.short_url}', '{self.date_created_utc}')" 
+        return f"Links('{self.user_id}', '{self.long_url}', '{self.short_url}', '{self.date_created_utc}')"
