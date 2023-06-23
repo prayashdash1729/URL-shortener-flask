@@ -9,14 +9,6 @@ import random
 import secrets
 import os
 
-with open("URLs.json", 'r') as c:
-    links = json.load(c)["links"]
-c.close()
-
-with open("config.json", 'r') as f:
-    params = json.load(f)["params"]
-f.close()
-
 
 def generate_short_url(length=6):
     chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -38,7 +30,8 @@ def home():
         db.session.add(link)
         db.session.commit()
         flash(f"URL shortened successfully!", "success")
-        return render_template("home.html", form=form, show=True, short_url=short_url, long_url=long_url)
+        return render_template("home.html", form=form, show=True, short_url="http://127.0.0.1:5000/" + short_url,
+                               long_url=long_url[:40] + "...")
 
     return render_template("home.html", form=form, show=False)
 
