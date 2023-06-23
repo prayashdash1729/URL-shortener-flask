@@ -2,10 +2,12 @@ from flask import Flask, render_template, request, redirect, flash, url_for
 from flask_login import login_user, current_user, logout_user, login_required
 from URL_shortener import app, db, bcrypt
 from URL_shortener.models import User, Links
-from URL_shortener.forms import RegistrationForm, LoginForm
+from URL_shortener.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from PIL import Image
 import json
 import random
-
+import secrets
+import os
 
 with open("URLs.json", 'r') as c:
     links = json.load(c)["links"]
@@ -36,7 +38,7 @@ def home():
             json.dump({"links": links}, f)
         f.close()
 
-        return render_template("home.html", long_url=long_url[:40] + "...", short_url=params["HOST"] + short_url, show=True)
+        return render_template("home.html", long_url=long_url[:40]+"...", short_url=params["HOST"]+short_url, show=True)
 
     return render_template("home.html", short_url="", show=False)
 
@@ -82,4 +84,45 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for("home"))
+    return redirect(url_for("login"))
+
+
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/assets/profile_pics', picture_fn)
+
+    output_size = (250, 250)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn
+
+
+@app.route("/profile", methods=["GET", "POST"])
+@login_required
+def profile():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_fn = save_picture(form.picture.data)
+            current_user.image_file = picture_fn
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash("Your account has been updated", "success")
+        return redirect(url_for("profile"))
+    elif request.method == "GET":
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    img_file = url_for('static', filename='assets/profile_pics/' + current_user.image_file)
+    return render_template("profile.html", title=current_user.username, img_file=img_file, form=form)
+
+
+@app.route("/dashboard")
+@login_required
+def dashboard():
+
+    return render_template("dashboard.html", title="Dashboard")
