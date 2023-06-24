@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
 from flask_login import login_user, current_user, logout_user, login_required
 from URL_shortener import app, db, bcrypt
-from URL_shortener.models import User, Links
+from URL_shortener.models import User, Links, Clicks
 from URL_shortener.forms import URLForm, RegistrationForm, LoginForm, UpdateAccountForm
 from PIL import Image
 import json
@@ -40,6 +40,13 @@ def home():
 def redirect_to_url(short_url):
     shorts = [link.short_url for link in Links.query.all()]
     if short_url in shorts:
+        Links.query.filter_by(short_url=short_url).first().times_clicked += 1
+        ip_address = request.remote_addr
+        owner_id = Links.query.filter_by(short_url=short_url).first().user_id
+        click = Clicks(link_id=Links.query.filter_by(short_url=short_url).first().id, user_id=owner_id,
+                       ip_address=ip_address)
+        db.session.add(click)
+        db.session.commit()
         return redirect(Links.query.filter_by(short_url=short_url).first().long_url)
     else:
         return render_template("404.html")
@@ -118,5 +125,16 @@ def profile():
 @app.route("/dashboard")
 @login_required
 def dashboard():
+    links = Links.query.filter_by(user_id=current_user.id).all()
+    clicks = Clicks.query.filter_by(user_id=current_user.id).all()
+    return render_template("dashboard.html", title="Dashboard", links=links, clicks=clicks)
 
-    return render_template("dashboard.html", title="Dashboard")
+
+@app.route("/dashboard/<short_url>")
+@login_required
+def statistics(short_url):
+    """
+    1. check if the short url belongs to the user. if yes, show statistics, else redirect to dashboard with flash msg
+    2.
+    """
+    return render_template("statistics.html", title="Statistics", short_url=short_url)
