@@ -55,9 +55,11 @@
 I have used Flask to create a webapp which shortens URLs. I have used Bootstrap for the template of the website.
 
 ### To Do
-- [ ] Add a database to store the URLs and their shortened versions.
-- [ ] Add a login system to keep track of the URLs shortened by a user.
-- [ ] Add a feature to keep track of the number of times a shortened URL is used by a user.
+- [x] Add a database to store the URLs and their shortened versions.
+- [x] Add a login system to keep track of the URLs shortened by a user.
+- [x] Add a feature to keep track of the number of times a shortened URL is clicked.
+- [ ] Add a feature to allow users to edit the long URL of a shortened URL.
+- [ ] Add a feature to allow users to delete a shortened URL.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
