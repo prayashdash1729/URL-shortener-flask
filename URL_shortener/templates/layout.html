@@ -89,6 +89,7 @@
                     {% if current_user.is_authenticated %}
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="rounded-circle" style="height: 2.0rem;" hspace="10" src="{{url_for('static', filename='assets/profile_pics/' + current_user.image_file )}}">
                                 {{current_user.username}}
                             </button>
                             <ul class="dropdown-menu" data-bs-theme="light">
