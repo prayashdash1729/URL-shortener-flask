@@ -163,3 +163,4 @@ cython_debug/
 temp/
 *.db
 *.json
+demo/demo.mp4

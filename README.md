@@ -53,7 +53,7 @@
 
 Demo Video:
 
-[![Watch the video](demo/home.png)](demo/demo.mp4)
+[![Watch the video](demo/home.png)](https://gumlet.tv/watch/67019b27b875f411d7331c59)
 
 
 I have used Flask to create a webapp which shortens URLs. I have used Bootstrap for the template of the website.
