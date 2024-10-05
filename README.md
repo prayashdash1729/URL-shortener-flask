@@ -50,7 +50,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![WebApp Screen Shot][webapp-screenshot]]()
+
+Demo Video:
+
+[![Watch the video](demo/home.png)](demo/demo.mp4)
+
 
 I have used Flask to create a webapp which shortens URLs. I have used Bootstrap for the template of the website.
 
